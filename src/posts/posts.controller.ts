@@ -10,41 +10,41 @@ import { PostsService } from './posts.service';
  * commentCount: number;
  */
 
-interface PostModel {
-  id: number;
-  author: string;
-  title: string;
-  content: string;
-  likeCount: number;
-  commentCount: number;
-}
+// interface PostModel {
+//   id: number;
+//   author: string;
+//   title: string;
+//   content: string;
+//   likeCount: number;
+//   commentCount: number;
+// }
 
-let posts : PostModel[] = [
-  {
-    id: 1,
-    author: 'newjeans_official',
-    title: '뉴진스 민지',
-    content: '메이크업 고치고 있는 민지',
-    likeCount: 1000000,
-    commentCount: 99999,
-  },
-  {
-    id: 2,
-    author: 'newjeans_official',
-    title: '뉴진스 혜린',
-    content: '노래 연습 하고 있는 혜린',
-    likeCount: 1000000,
-    commentCount: 99999,
-  },
-  {
-    id: 3,
-    author: 'blackpink_official',
-    title: '블랙핑크 로제 ',
-    content: '종합운동장에서 공연중인 로제',
-    likeCount: 1000000,
-    commentCount: 99999,
-  },
-];
+// let posts : PostModel[] = [
+//   {
+//     id: 1,
+//     author: 'newjeans_official',
+//     title: '뉴진스 민지',
+//     content: '메이크업 고치고 있는 민지',
+//     likeCount: 1000000,
+//     commentCount: 99999,
+//   },
+//   {
+//     id: 2,
+//     author: 'newjeans_official',
+//     title: '뉴진스 혜린',
+//     content: '노래 연습 하고 있는 혜린',
+//     likeCount: 1000000,
+//     commentCount: 99999,
+//   },
+//   {
+//     id: 3,
+//     author: 'blackpink_official',
+//     title: '블랙핑크 로제 ',
+//     content: '종합운동장에서 공연중인 로제',
+//     likeCount: 1000000,
+//     commentCount: 99999,
+//   },
+// ];
 
 @Controller('posts')
 export class PostsController {
@@ -71,11 +71,11 @@ export class PostsController {
 
   @Post()
   postPost(
-    @Body('author') author: string,
+    @Body('authorId') authorId: number,
     @Body('title') title: string,
     @Body('content') content: string,
     ) {
-      return this.postsService.createPost(author, title, content);
+      return this.postsService.createPost(authorId, title, content);
     }
   
   // 4) PUT /posts/:id
@@ -84,11 +84,10 @@ export class PostsController {
   @Put(':id')
   putPost(
     @Param('id') id: string,
-    @Body('author') author?: string,
     @Body('title') title?: string,
     @Body('content') content?: string,
   ) {
-    return this.postsService.updatePost(+id, author, title, content);
+    return this.postsService.updatePost(+id, title, content);
   }
   
   // 5) DELETE /posts/:id
